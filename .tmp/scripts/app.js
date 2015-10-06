@@ -150,7 +150,6 @@ require.register('views/imageListItem', function (exports, require, module) {
         },
         updatePost: function updatePost(e) {
             e.preventDefault();
-            console.log($('.js-editCreateUrl').val());
             this.model.save('url', $('.js-editCreateUrl').val());
             this.model.save('caption', $('.js-editCreateCaption').val());
             this.model.save('isEditing', false);

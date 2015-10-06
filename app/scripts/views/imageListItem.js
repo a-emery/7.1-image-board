@@ -36,7 +36,6 @@ export default Backbone.View.extend({
 
   updatePost: function(e){
     e.preventDefault();
-    console.log($(".js-editCreateUrl").val());
     this.model.save('url', $(".js-editCreateUrl").val());
     this.model.save('caption', $('.js-editCreateCaption').val());
     this.model.save('isEditing', false);
