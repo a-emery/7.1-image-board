@@ -15,7 +15,102 @@ $base-font-color: $dark-gray;
 $base-background-color: $very-light-gray;
 
 body {
-  background-color: $base-background-color;
+  background-color: rgba(237, 238, 239, 1);
   color: $base-font-color;
   font-family: $base-font-family;
+}
+
+.header {
+  height: 50px;
+  background-image: linear-gradient(rgba(86, 117, 153, 1), rgba(59, 103, 154, 1));
+  font-size: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.header-plus {
+  margin-left: 7%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.createPostContainer {
+  background: white;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+}
+
+.createPost {
+  width: 75%;
+  margin: 0 auto;
+  padding: 30px;
+  @include clearfix;
+}
+
+.createUrl {
+  display: block;
+  width: 100%;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid rgba(192, 192, 192, 1);
+  border-radius: 2px;
+}
+
+.createImageCaption {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid rgba(192, 192, 192, 1);
+  border-radius: 2px;
+  resize: none;
+}
+
+.submitButton {
+  color: white;
+  background: rgba(81, 171, 87, 1);
+  border: none;
+  border-radius: 7px;
+  height: 60px;
+  padding: 0 25px;
+  margin-top: 10px;
+  float: right;
+}
+
+.cancelButton {
+  background: rgba(182, 182, 182, 1);
+  border: none;
+  height: 60px;
+  color: white;
+  padding: 0 25px;
+  margin: 10px 10px;
+  float: right;
+  border-radius: 7px;
+}
+
+.imageList {
+  width: 70%;
+  margin: 0 auto;
+  padding: 5%;
+  list-style: none;
+  background: rgba(224, 225, 226, 1);
+}
+
+.postImage {
+  width: 90%;
+}
+
+.postCaption {
+  width: 90%;
+  background: white;
+  padding: 20px;
+  margin-top: -3px;
+}
+
+.postListItem {
+  margin-bottom: 20px;
 }

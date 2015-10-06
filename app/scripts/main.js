@@ -1,4 +1,16 @@
+import CreatePostView from 'views/createPost';
+import PostsCollection from 'models/PostsCollection';
+import ImageList from 'views/imageList';
+
 $(document).ready(function(){
-  // prepend the contents of `app/templates/application.hbs` into `body`
   $('#container').append(JST.application());
+
+  var postsCollection = new PostsCollection();
+  postsCollection.fetch();
+
+  var createPostView = new CreatePostView({collection: postsCollection});
+  $('.createPostContainer').append(createPostView.render().el);
+
+  var imageList = new ImageList({collection: postsCollection});
+  $('.images').append(imageList.render().el);
 });

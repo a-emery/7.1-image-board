@@ -1,8 +1,10 @@
 export default Backbone.Model.extend({
+  idAttribute: "_id",
   defaults: function(){
     return  {
       url: "[no URL]",
-      description: "[no description]"
+      caption: "[no description]",
+      createdAt: Date.now()
     };
   }
 
