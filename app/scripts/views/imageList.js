@@ -22,7 +22,7 @@ export default Backbone.View.extend({
     this.$el.html('');
     this.collection.each(function(post){
       var imageListItem = new ImageListItem({model: post});
-      self.$el.append(imageListItem.render().el);
+      self.$el.prepend(imageListItem.render().el);
     });
   }
 

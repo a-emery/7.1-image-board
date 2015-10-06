@@ -13,8 +13,9 @@ require.register('main', function (exports, require, module) {
         $('#container').append(JST.application());
         var postsCollection = new _modelsPostsCollection2['default']();
         postsCollection.fetch();
+        postsCollection.comparator = 'createdAt';
         var createPostView = new _viewsCreatePost2['default']({ collection: postsCollection });
-        $('.createPostContainer').append(createPostView.render().el);
+        $('body').append(createPostView.render().el);
         var imageList = new _viewsImageList2['default']({ collection: postsCollection });
         $('.images').append(imageList.render().el);
     });
@@ -28,7 +29,8 @@ require.register('models/Post', function (exports, require, module) {
             return {
                 url: '[no URL]',
                 caption: '[no description]',
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                isEditing: false
             };
         }
     });
@@ -54,13 +56,19 @@ require.register('views/createPost', function (exports, require, module) {
     exports['default'] = Backbone.View.extend({
         tagName: 'form',
         className: 'createPost',
-        events: { 'click .submitButton': 'createPost' },
+        events: {
+            'click .submitButton': 'createPost',
+            'click .header-plus': 'toggleCreate',
+            'click .cancelButton': 'toggleCreate'
+        },
         template: JST.create,
         createPost: function createPost(e) {
             e.preventDefault();
+            console.log(this.serializeForm());
             this.collection.create(this.serializeForm());
             this.$('input[type=text]').val('');
             this.$('textarea').val('');
+            $('.createPostContainer').toggleClass('hidden');
         },
         serializeForm: function serializeForm() {
             var result = {};
@@ -73,6 +81,11 @@ require.register('views/createPost', function (exports, require, module) {
         render: function render() {
             this.$el.html(this.template());
             return this;
+        },
+        toggleCreate: function toggleCreate(e) {
+            e.preventDefault();
+            console.log('something');
+            $('.createPostContainer').toggleClass('hidden');
         }
     });
     module.exports = exports['default'];
@@ -101,7 +114,7 @@ require.register('views/imageList', function (exports, require, module) {
             this.$el.html('');
             this.collection.each(function (post) {
                 var imageListItem = new _viewsImageListItem2['default']({ model: post });
-                self.$el.append(imageListItem.render().el);
+                self.$el.prepend(imageListItem.render().el);
             });
         }
     });
@@ -113,10 +126,40 @@ require.register('views/imageListItem', function (exports, require, module) {
     exports['default'] = Backbone.View.extend({
         tagName: 'li',
         className: 'postListItem',
+        events: {
+            'click .js-delete': 'deletePost',
+            'click .js-edit': 'editPost',
+            'click .js-editSubmit': 'updatePost',
+            'click .js-editCancel': 'cancelUpdate'
+        },
+        initialize: function initialize() {
+            this.model.set('isEditing', false);
+        },
         template: JST.imageListItem,
         render: function render() {
             this.$el.html(this.template({ model: this.model.toJSON() }));
             return this;
+        },
+        deletePost: function deletePost() {
+            console.log('destroy');
+            this.model.destroy();
+        },
+        editPost: function editPost() {
+            this.model.set('isEditing', true);
+            this.render();
+        },
+        updatePost: function updatePost(e) {
+            e.preventDefault();
+            console.log($('.js-editCreateUrl').val());
+            this.model.save('url', $('.js-editCreateUrl').val());
+            this.model.save('caption', $('.js-editCreateCaption').val());
+            this.model.save('isEditing', false);
+            this.render();
+        },
+        cancelUpdate: function cancelUpdate(e) {
+            e.preventDefault();
+            this.model.set('isEditing', false);
+            this.render();
         }
     });
     module.exports = exports['default'];

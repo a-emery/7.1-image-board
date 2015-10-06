@@ -5,16 +5,20 @@ export default Backbone.View.extend({
   className: 'createPost',
 
   events: {
-    'click .submitButton': 'createPost'
+    'click .submitButton': 'createPost',
+    'click .header-plus': 'toggleCreate',
+    'click .cancelButton': 'toggleCreate'
   },
 
   template: JST.create,
 
   createPost: function(e){
     e.preventDefault();
+    console.log(this.serializeForm());
     this.collection.create(this.serializeForm());
     this.$('input[type=text]').val('');
     this.$('textarea').val('');
+    $('.createPostContainer').toggleClass('hidden');
   },
 
   serializeForm: function(){
@@ -30,5 +34,11 @@ export default Backbone.View.extend({
     this.$el.html(this.template());
     return this;
   },
+
+  toggleCreate: function(e) {
+    e.preventDefault();
+    console.log('something');
+    $('.createPostContainer').toggleClass('hidden');
+  }
 
 });

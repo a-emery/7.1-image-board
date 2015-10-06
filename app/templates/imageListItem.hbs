@@ -1,2 +1,16 @@
 <img src="{{model.url}}" alt="" class="postImage">
-<div class="postCaption">{{model.caption}}</div>
+<div class="postCaption">{{model.caption}}
+  <div class="deleteButton js-delete">Delete</div>
+  <div class="deleteButton js-edit">Edit</div>
+</div>
+
+{{#if model.isEditing}}
+<div class="editShow">
+  <h4>Edit Image</h4>
+  <form action="">
+    <input type="text" value="{{model.url}}" name="url" class="createUrl js-editCreateUrl">
+    <input type="text" value="{{model.caption}}" name="caption" class="createUrl js-editCreateCaption">
+    <button type="submit" class="editSubmitButton js-editSubmit">Save</button>
+    <button class="editCancelButton js-editCancel">CANCEL</button>
+  </form>
+{{/if}}

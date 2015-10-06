@@ -8,8 +8,10 @@ $(document).ready(function(){
   var postsCollection = new PostsCollection();
   postsCollection.fetch();
 
+  postsCollection.comparator = 'createdAt';
+
   var createPostView = new CreatePostView({collection: postsCollection});
-  $('.createPostContainer').append(createPostView.render().el);
+  $('body').append(createPostView.render().el);
 
   var imageList = new ImageList({collection: postsCollection});
   $('.images').append(imageList.render().el);

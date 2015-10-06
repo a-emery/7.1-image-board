@@ -4,7 +4,8 @@ export default Backbone.Model.extend({
     return  {
       url: "[no URL]",
       caption: "[no description]",
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      isEditing: false
     };
   }
 
