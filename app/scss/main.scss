@@ -14,6 +14,9 @@ $very-light-gray: #fafafa;
 $base-font-color: $dark-gray;
 $base-background-color: $very-light-gray;
 
+// Media Queries
+$mobile: new-breakpoint(max-width 768px 4);
+
 body {
   background-color: rgba(237, 238, 239, 1);
   color: $base-font-color;
@@ -96,9 +99,13 @@ body {
 .imageList {
   width: 70%;
   margin: 0 auto;
-  padding: 5%;
+  padding: 75px 5% 0 5%;
   list-style: none;
   background: rgba(224, 225, 226, 1);
+
+  @include media($mobile) {
+    width: 100%;
+  }
 }
 
 .postImage {

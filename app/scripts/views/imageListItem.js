@@ -10,7 +10,7 @@ export default Backbone.View.extend({
     'click .js-editSubmit': 'updatePost',
     'click .js-editCancel': 'cancelUpdate'
   },
-
+  
   initialize: function(){
     this.model.set('isEditing', false);
   },
